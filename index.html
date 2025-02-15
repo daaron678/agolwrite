@@ -45,16 +45,28 @@
 
       const simpleMarkerSymbol = {  
         type: "simple-marker",  
+        style: "diamond",      // Challenger 1. Diamond refers to resources in eastern DRC. 
         color: [255, 165, 0],  // Light orange 
         outline: {  
-          color: [255, 255, 255], // White  
+          color: [0, 0, 0], // black  
           width: 1
         }  
       };
 
+      const popupTemplate = {
+        title: "{Name}",
+        content: "{Description}"
+      }
+      const attributes = {
+        Name: "Goma, DRC",
+        Description: "Goma is the capital of North Kivu Province"
+      }
+
       const pointGraphic = new Graphic({  
         geometry: point,  
-        symbol: simpleMarkerSymbol  
+        symbol: simpleMarkerSymbol,
+        attributes: attributes,
+        popupTemplate: popupTemplate  
       });
 
       graphicsLayer.add(pointGraphic);
