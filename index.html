@@ -45,16 +45,19 @@
 
       const simpleMarkerSymbol = {  
         type: "simple-marker",  
-        color: [255, 165, 0],  // Light orange
+        color: [255, 165, 0],  // Light orange 
         outline: {  
           color: [255, 255, 255], // White  
           width: 1
-        },
-        size: 10, // Size of the marker in points
-        angle: 0, // Rotation angle of the marker
-        xoffset: 0, // X-offset of the marker in points
-        yoffset: 0  // Y-offset of the marker in points
+        }  
       };
+
+      const pointGraphic = new Graphic({  
+        geometry: point,  
+        symbol: simpleMarkerSymbol  
+      });
+
+      graphicsLayer.add(pointGraphic);
     });
   </script>
 
