@@ -82,6 +82,15 @@
         outFields: ["primarynam", "EventType", "EnactedPro", "PADDDtracker", "Cause"],
         popupTemplate: PAD
       });
+
+      // Add new feature layer for mining zones in DRC
+      const mining_zones = new FeatureLayer({
+        url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/DRC_Mining_Zones/FeatureServer",
+        outFields: ["Name"],
+        popupTemplate: {
+          title: "<b>{Name}</b>"
+        }
+      });
       
       map.add(DRC_parks_Layer);
     });
