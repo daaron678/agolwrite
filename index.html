@@ -19,8 +19,10 @@
       "esri/views/MapView",
       "esri/Graphic",  
       "esri/layers/GraphicsLayer",
-      "esri/layers/FeatureLayer" 
-    ], function (esriConfig,Map, MapView, Graphic, GraphicsLayer, FeatureLayer) {
+      "esri/layers/FeatureLayer",
+      "esri/widgets/Editor",
+      "esri/widgets/Legend" 
+    ], function (esriConfig,Map, MapView, Graphic, GraphicsLayer, FeatureLayer, Editor,Legend) {
 
       esriConfig.apiKey = "AAPTxy8BH1VEsoebNVZXo8HurHJHfSmD6Cm_uV3pceVBDTiGAuoxaiNeGNYE1FhZE4iS7OQGQaHf26579IbGOgWT6YA608K2YFeRi-fMX1ZwN7ytSFcC1EZ-rW4xikf9ZMlYfOyvdysX8Sf0kqyNBBq0d_HiW2S5VnGXklVJGUX_8q3JBWItTG5s-Q9hpTp6ddBgwM6bDnDuwjvwqC17LNXkkxZNt-PyTv1IjiVXGVLcDDk.AT1_vp0kXsvd";
       const map = new Map({
@@ -94,6 +96,51 @@
       
       map.add(DRC_parks_Layer);
       map.add(mining_zones);
+
+      //adding the const for the feature layer
+      const myParks = new FeatureLayer({
+      url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/Local_Parks/FeatureServer",
+      //adding the popup here
+      outFields: ["ParkName"],
+
+      });
+      //adding the feature layer to the map
+      map.add(myParks);
+
+      // Set the point layer's LayerInfo
+      const pointInfos = {
+        layer: myParks
+      }
+
+      // Begin Editor constructor
+      const editor = new Editor({
+        view: view,
+        layerInfos: [pointInfos]
+      }); // End Editor constructor
+
+      // Add the widget to the view
+      view.ui.add(editor, "top-right");
+
+      // Begin Legend constructor
+      const legend = new Legend({
+        view: view,
+        layerInfos: [
+          {
+            layer: myParks,
+            title: "Local Parks"
+          },
+          {
+            layer: DRC_parks_Layer,
+            title: "Protected Areas"
+          },
+          {
+            layer: mining_zones,
+            title: "Mining Zones"
+          }
+        ]
+      })
+      view.ui.add(legend, "bottom-right");
+
     });
   </script>
 
