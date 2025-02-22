@@ -99,9 +99,26 @@
 
       //adding the const for the feature layer
       const myParks = new FeatureLayer({
-      url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/Local_Parks/FeatureServer",
-      //adding the popup here
-      outFields: ["ParkName"],
+        url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/Local_Parks/FeatureServer",
+        //adding the popup here
+        outFields: ["ParkName"],
+        // Challenge 2: Add labels to new myParks feature
+        popupTemplate: {
+          title: "{ParkName}",
+          // Challenge 1: Change symbol to icon
+          renderer: {
+            type: "simple", 
+            symbol: {
+              type: "icon", 
+              size: 4,
+              color: "green",
+              outline: {
+                width: .25,
+                color: "black"
+              },
+            }
+          }
+        }
 
       });
       //adding the feature layer to the map
