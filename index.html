@@ -21,8 +21,9 @@
       "esri/layers/GraphicsLayer",
       "esri/layers/FeatureLayer",
       "esri/widgets/Editor",
-      "esri/widgets/Legend" 
-    ], function (esriConfig,Map, MapView, Graphic, GraphicsLayer, FeatureLayer, Editor,Legend) {
+      "esri/widgets/Legend",
+      "esri/symbols/IconSymbol3DLayer" 
+    ], function (esriConfig,Map, MapView, Graphic, GraphicsLayer, FeatureLayer, Editor,Legend, IconSymbol3DLayer) {
 
       esriConfig.apiKey = "AAPTxy8BH1VEsoebNVZXo8HurHJHfSmD6Cm_uV3pceVBDTiGAuoxaiNeGNYE1FhZE4iS7OQGQaHf26579IbGOgWT6YA608K2YFeRi-fMX1ZwN7ytSFcC1EZ-rW4xikf9ZMlYfOyvdysX8Sf0kqyNBBq0d_HiW2S5VnGXklVJGUX_8q3JBWItTG5s-Q9hpTp6ddBgwM6bDnDuwjvwqC17LNXkkxZNt-PyTv1IjiVXGVLcDDk.AT1_vp0kXsvd";
       const map = new Map({
@@ -105,22 +106,23 @@
         // Challenge 2: Add labels to new myParks feature
         popupTemplate: {
           title: "{ParkName}",
-          // Challenge 1: Change symbol to icon
-          renderer: {
-            type: "simple", 
-            symbol: {
-              type: "icon", 
-              size: 4,
-              color: "green",
-              outline: {
-                width: .25,
-                color: "black"
-              },
-            }
-          }
-        }
-
-      });
+        },
+        // Challenge 1: Making symbol an icon type
+        // elevationInfo: {
+        //   mode: "on-the-ground",
+        // },
+        // screenSizePerspectiveEnabled: true,
+        // renderer: {
+        //   type: "point",  // autocasts as new PointSymbol3D()
+        //   symbolLayers: [{
+        //     type: "icon",  // autocasts as new IconSymbol3DLayer()
+        //     rotation: 90, // degree
+        //     size: 8,  // points
+        //     resource: { primitive: "circle" },
+        //     material: { color: "red" }
+        //   }]
+        // }
+      }); 
       //adding the feature layer to the map
       map.add(myParks);
 
